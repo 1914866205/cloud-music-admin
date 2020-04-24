@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class SysAdminServiceTest {
-    @Resource
-    private SysAdminService sysAdminService;
+//    @Resource
+//    private SysAdminService sysAdminService;
 //    @Resource
 //    private DefaultKaptcha defaultKaptcha;
 //    @Test

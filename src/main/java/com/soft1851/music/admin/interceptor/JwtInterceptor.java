@@ -1,8 +1,11 @@
 package com.soft1851.music.admin.interceptor;
 
+import com.alibaba.fastjson.JSONArray;
 import com.soft1851.music.admin.common.ResultCode;
+import com.soft1851.music.admin.entity.SysRole;
 import com.soft1851.music.admin.exception.JwtException;
 import com.soft1851.music.admin.service.SysAdminService;
+import com.soft1851.music.admin.service.SysRoleService;
 import com.soft1851.music.admin.util.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -12,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @Description Jwt拦截器
@@ -24,7 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
     @Resource
-    private SysAdminService sysAdminService;
+    private SysRoleService sysRoleService;
+//    private SysAdminService sysAdminService;
 
     /**
      * 前置处理，拦截请求
@@ -47,13 +52,25 @@ public class JwtInterceptor implements HandlerInterceptor {
             //已经登录
             log.info("## token={}", token);
             //鉴权
-            //根据id查到权限
-            String getAdminMenuByAdminId = sysAdminService.getAdminMenuByAdminId(JwtTokenUtil.getUserId(token)).toString();
+//            //根据id查到权限
+//            String getAdminMenuByAdminId = sysAdminService.getAdminMenuByAdminId(JwtTokenUtil.getUserId(token)).toString();
             //查询token的权限
+            //从token中解析出rolds字符串
             String tokenRole=JwtTokenUtil.getUserRole(token);
-            log.info("根据id查权限"+sysAdminService.getAdminMenuByAdminId(JwtTokenUtil.getUserId(token)).toString());
-            log.info("根据权限查id"+JwtTokenUtil.getUserRole(token));
-            if (!getAdminMenuByAdminId.equals(tokenRole)) {
+            log.info("## tokenRole={}",tokenRole);
+//            反序列化成List
+            List<SysRole> roleList = JSONArray.parseArray(tokenRole, SysRole.class);
+            //从request中取出客户端传来的roleId
+            String roleId=request.getParameter("roleId");
+            log.info("## roleId={}",roleId);
+            //到 roles中查找对比，此部分代码在SysRoleService
+            boolean flag = sysRoleService.checkRole(roleList, Integer.parseInt(roleId));
+            log.info("## flag={}", flag);
+            //在token中解析出的roles中含有请求的role值，放行到controller中获取数据
+//            log.info("根据id查权限"+sysAdminService.getAdminMenuByAdminId(JwtTokenUtil.getUserId(token)).toString());
+//            log.info("根据权限查id"+JwtTokenUtil.getUserRole(token));
+//            if (!getAdminMenuByAdminId.equals(tokenRole)) {
+            if (!flag) {
                 log.info("### 用户权限不足 ###");
                 //通过自定义异常抛出权限不足的信息，由全局统一处理
                 throw new JwtException("用户权限不足", ResultCode.PERMISSION_NO_ACCESS);
@@ -64,6 +81,7 @@ public class JwtInterceptor implements HandlerInterceptor {
                     //通过自定义异常抛出token失效的信息，由全局统一处理
                     throw new JwtException("token已失效", ResultCode.USER_TOKEN_EXPIRES);
                 } else {
+                    log.info("通过认证，放行到controller层");
                     //通过认证，放行到controller层
                     return true;
                 }

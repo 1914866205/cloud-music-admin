@@ -13,8 +13,9 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.*;
 
 public class RequestWrapper extends HttpServletRequestWrapper {
+    //用于将流保存下来
     private final String body;
-
+    //封装HttpServletRequest的数据
     public RequestWrapper(HttpServletRequest request) {
         super(request);
         StringBuilder stringBuilder = new StringBuilder();
@@ -80,11 +81,12 @@ public class RequestWrapper extends HttpServletRequestWrapper {
 
     }
 
+    //对外提供读取流的方法
     @Override
     public BufferedReader getReader() throws IOException {
         return new BufferedReader(new InputStreamReader(this.getInputStream()));
     }
-
+    //提供数据
     public String getBody() {
         return this.body;
     }

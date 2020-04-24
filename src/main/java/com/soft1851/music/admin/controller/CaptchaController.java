@@ -1,10 +1,10 @@
 package com.soft1851.music.admin.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.soft1851.music.admin.common.ResponseResult;
 import com.soft1851.music.admin.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +14,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -33,20 +32,27 @@ public class CaptchaController {
     @Resource
     private RedisService redisService;
     @PostMapping("/captcha")
-    public void defaultCaptcha(@RequestBody String userIp){
+    public void defaultCaptcha(@Param("userIp") String userIp){
+//    public void defaultCaptcha(@RequestBody String userIp){
         log.info("**********************");
         log.info(userIp);
+//        JSONObject jsonObject = JSONObject.parseObject(userIp);
         //如果key存在，则修改key
+//        String ip = jsonObject.getString("userIp");
+//        String ip = jsonObject.getString("value");
             //生成验证码
             String text = defaultKaptcha.createText();
             log.info(text);
+
         //把验证码存放在Redis    有效时长10分钟
-        if (redisService.get(userIp) != null) {
-            redisService.set(userIp,text,10);
-        }else {
-            //如果key不存在，则保存key
-            redisService.save(userIp,text,10);
-        }
+            redisService.set(userIp, text, 10L);
+//            redisService.set(ip, text, 10L);
+//        if (redisService.get(ip) != null) {
+//            redisService.set(ip,text,10);
+//        }else {
+//            //如果key不存在，则保存key
+//            redisService.save(ip,text,10);
+//        }
         log.info("**********************");
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         assert sra != null;

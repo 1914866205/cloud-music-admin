@@ -2,27 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.soft1851.music.admin.mapper.SysMenuMapper">
 
-    <!--    根据角色id查询顶级权限(父类id=0),采用多对多调用查询子类权限方法-->
-    <resultMap id="menuMap" type="map">
-        <collection property="subMenus" column="{roleId=role_id,parentId=menu_id}" select="getChildMenuByRoleId"/>
-    </resultMap>
-    <select id="getParentMenuByRoleId" resultMap="menuMap">
-        SELECT t1.title, t1.icon, t1.path, t2.role_id, t2.menu_id
-        FROM role_menu t2
-                 LEFT JOIN sys_menu t1 ON t2.menu_id = t1.id
-        WHERE t2.role_id = #{roleId}
-          AND t1.parent_id = 0
-        ORDER BY t1.sort
-    </select>
-    <!--    根据父类id及角色id查询子类权限-->
-    <select id="getChildMenuByRoleId" resultType="map">
-        SELECT t1.title, t1.icon, t1.path, t2.permissions
-        FROM role_menu t2
-                 LEFT JOIN sys_menu t1 on t2.menu_id = t1.id
-        WHERE t2.role_id = #{roleId}
-          AND t1.parent_id = #{parentId}
-          AND t1.id = t2.menu_id
-        ORDER BY t1.sort
-    </select>
+<!--    &lt;!&ndash;    根据角色id查询顶级权限(父类id=0),采用多对多调用查询子类权限方法&ndash;&gt;-->
+<!--    <resultMap id="menuMap" type="map">-->
+<!--        <collection property="subMenus" column="{roleId=role_id,parentId=menu_id}" select="getChildMenuByRoleId"/>-->
+<!--    </resultMap>-->
+<!--    <select id="getParentMenuByRoleId" resultMap="menuMap">-->
+<!--        SELECT t1.title, t1.icon, t1.path, t2.role_id, t2.menu_id-->
+<!--        FROM role_menu t2-->
+<!--                 LEFT JOIN sys_menu t1 ON t2.menu_id = t1.id-->
+<!--        WHERE t2.role_id = #{roleId}-->
+<!--          AND t1.parent_id = 0-->
+<!--        ORDER BY t1.sort-->
+<!--    </select>-->
+<!--    &lt;!&ndash;    根据父类id及角色id查询子类权限&ndash;&gt;-->
+<!--    <select id="getChildMenuByRoleId" resultType="map">-->
+<!--        SELECT t1.title, t1.icon, t1.path-->
+<!--        FROM role_menu t2-->
+<!--                 LEFT JOIN sys_menu t1 on t2.menu_id = t1.id-->
+<!--        WHERE t2.role_id = #{roleId}-->
+<!--          AND t1.parent_id = #{parentId}-->
+<!--          AND t1.id = t2.menu_id-->
+<!--        ORDER BY t1.sort-->
+<!--    </select>-->
 </mapper>
 

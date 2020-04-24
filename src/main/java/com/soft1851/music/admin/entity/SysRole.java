@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -41,9 +44,12 @@ public class SysRole extends Model<SysRole> {
     /**
      * 角色描述
      */
+    @JsonIgnore
     @TableField("description")
     private String description;
 
+    @JsonIgnore
+    private List<SysMenu> menus;
 
     @Override
     protected Serializable pkVal() {

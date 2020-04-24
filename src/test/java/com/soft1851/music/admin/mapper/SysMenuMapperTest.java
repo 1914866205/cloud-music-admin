@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class SysMenuMapperTest {
 
-    @Resource
-    private SysMenuMapper sysMenuMapper;
-    @Test
-    void getParentMenuByRoleId() {
-        System.out.println(sysMenuMapper.getParentMenuByRoleId(1));
-    }
+//    @Resource
+//    private SysMenuMapper sysMenuMapper;
+//    @Test
+//    void getParentMenuByRoleId() {
+//        System.out.println(sysMenuMapper.getParentMenuByRoleId(1));
+//    }
 }

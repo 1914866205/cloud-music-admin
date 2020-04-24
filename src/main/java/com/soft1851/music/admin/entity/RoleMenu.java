@@ -44,11 +44,11 @@ public class RoleMenu extends Model<RoleMenu> {
     @TableField("menu_id")
     private Integer menuId;
 
-    /**
-     * 角色对资源的细粒度按钮权限
-     */
-    @TableField("permissions")
-    private String permissions;
+//    /**
+//     * 角色对资源的细粒度按钮权限
+//     */
+//    @TableField("permissions")
+//    private String permissions;
 
 
     @Override

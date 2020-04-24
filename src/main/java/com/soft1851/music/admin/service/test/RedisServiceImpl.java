@@ -1,6 +1,6 @@
 //package com.soft1851.music.admin.service.Impl;
 //
-//import com.soft1851.music.admin.service.RedisService;
+//import com.soft1851.music.admin.service.impl.RedisService;
 //import org.springframework.data.redis.core.RedisTemplate;
 //import org.springframework.data.redis.core.ValueOperations;
 //import org.springframework.stereotype.Service;

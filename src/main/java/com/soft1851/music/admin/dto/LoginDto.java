@@ -16,7 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginDto {
-    private String name;
+    private String username;
     private String password;
-    private String verigyCode;
+    private String checkCode;
+    private String userIp;
 }

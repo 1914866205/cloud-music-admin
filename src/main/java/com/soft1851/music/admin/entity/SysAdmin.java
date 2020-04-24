@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -41,6 +44,8 @@ public class SysAdmin extends Model<SysAdmin> {
     /**
      * 密码
      */
+    //加上此注解，不会被客户端看到
+    @JsonIgnore
     @TableField("password")
     private String password;
 
@@ -74,10 +79,13 @@ public class SysAdmin extends Model<SysAdmin> {
     @TableField("status")
     private Integer status;
 
-
     @Override
     protected Serializable pkVal() {
         return this.id;
     }
 
+    /**
+     * 权限集合
+     */
+    private List<SysRole> roles;
 }

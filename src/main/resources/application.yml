@@ -2,22 +2,35 @@ server:
   port: 8080
 
 spring:
+  # jackson配置
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  # 数据源配置
   datasource:
-    url: jdbc:mysql://rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com:3306/cloud_music?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
-    username: root
-    password: XuNiit_#
-    driver-class-name: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    #    url: jdbc:mysql://rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com:3306/cloud_music?useUnide=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true
+    url: jdbc:mysql://localhost:3306/cloud_music?useUnide=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true
+    #    username: root
+    username: ntt
+    #    password: XuNiit_#
+    password: .15252205596xin
     hikari:
+      # 最小连接数
       minimum-idle: 1
+      # 最大连接数
       maximum-pool-size: 20
+      # 自动提交
       auto-commit: true
+      # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
       idle-timeout: 10000
-      max-lifetime: 60000
+      # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟 1800000ms
+      max-lifetime: 1800000
+      # 等待连接池分配连接的最大时长（毫秒）
       connection-timeout: 30000
+      # 连接测试查询语句
+      connection-test-query: SELECT 1
 
   redis:
     database: 0
@@ -31,13 +44,16 @@ spring:
         max-active: 8
         max-wait: 1ms
       shutdown-timeout: 100ms
-#Mybatis-Plus����
+
+#Mybatis-Plus配置
 mybatis-plus:
+  # mapper映射文件路径
   mapper-locations: classpath:mapper/*.xml
-  type-enums-package: com.soft1851.music.admin.entity
+  # pojo类所在包路径
+  type-aliases-package: com.sofot1851.music.admin.entity
   global-config:
     db-config:
-      #��������:auto����������input�û�����id��id_workerȫ��Ψһ������id��UUIDȫ��Ψһ��UUID
+      #主键类型：auto主键自增，input用户输入id，id_worker全局唯一的数字id，UUID全局唯一的UUID
       id-type: auto
-      #�����շ�ת��
+      #开启驼峰式转换
       table-underline: true

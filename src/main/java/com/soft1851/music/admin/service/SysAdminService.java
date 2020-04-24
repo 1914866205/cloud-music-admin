@@ -22,29 +22,29 @@ public interface SysAdminService extends IService<SysAdmin> {
      * @param loginDto
      * @return boolean
      */
-    boolean login(LoginDto loginDto);
+    boolean isLogin(LoginDto loginDto);
+//    /**
+//     * 根据用户id查询用户信息及角色信息
+//     * @param userId
+//     * @return
+//     */
+//    Map<String, Object> getAdminMenuByAdminId(String userId);
+//
+//
+//    /**
+//     * 根据用户查id
+//     * @return
+//     */
+//    String getIdByAdmin(SysAdmin sysAdmin);
+//
+//
+//    Map<String, Object> getAdminMenuByAdminId();
+
 
     /**
-     * 根据用户id查询用户信息及角色信息
-     * @param userId
+     * 根据name查询Admin信息，其中包含其所有角色
+     * @param name
      * @return
      */
-    Map<String, Object> getAdminMenuByAdminId(String userId);
-
-
-    /**
-     * 根据用户查id
-     * @return
-     */
-    String getIdByAdmin(SysAdmin sysAdmin);
-
-
-    /**
-     * 登录
-     * @param loginDto
-     * @return
-     */
-    String sign(LoginDto loginDto);
-
-    Map<String,Object> getAdminMenuByAdminId();
+    SysAdmin getAdminAndRolesByName(String name);
 }
