@@ -16,19 +16,17 @@ import java.util.Map;
  */
 public interface SysRoleService extends IService<SysRole> {
     /**
-     * 根据角色id获取角色信息(基础信息和该角色所有菜单)
+     * 根据角色id获取角色信息（基础信息和该角色所有菜单）
      * @param roleId
      * @return
      */
-    Map<String, Object> selectRoleById(int roleId);
+    Map<String,Object> selectRoleById(int roleId);
 
     /**
      * 检查roleId是否在roles中存在
-     *
      * @param roles
-     * @param roldId
-     * @return
+     * @param roleId
+     * @return boolean
      */
-    boolean checkRole(List<SysRole> roles, int roldId);
-
+    boolean checkRole(List<SysRole> roles, int roleId);
 }

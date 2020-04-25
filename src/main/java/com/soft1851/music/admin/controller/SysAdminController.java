@@ -49,6 +49,7 @@ public class SysAdminController {
             //将该管理员 的所有角色的集合roles存入token,在后面鉴权的时候查找,有效时间为10分钟
             String token = JwtTokenUtil.getToken(admin.getId(), JSONObject.toJSONString(roles), new Date(System.currentTimeMillis() + 10L * 60L * 1000L));
             map.put("admin", admin);
+            log.info(token);
             map.put("token", token);
         } else {
             map.put("msg", "登录失败");
@@ -59,6 +60,7 @@ public class SysAdminController {
     @GetMapping("/permission")
     public ResponseResult getPerMissions(@Param("name") String name) {
         log.info("鉴权成功");
+        System.out.println(sysAdminService.getAdminAndRolesByName(name));
         return ResponseResult.success(sysAdminService.getAdminAndRolesByName(name));
     }
 }

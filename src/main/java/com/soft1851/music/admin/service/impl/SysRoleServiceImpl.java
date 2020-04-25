@@ -29,45 +29,36 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     private SysRoleMapper sysRoleMapper;
 
     /**
-     * 根据角色id查询角色信息(基础信息和该角色所有菜单)
-     *
+     * 根据角色id获取角色信息（基础信息和该角色所有菜单）
      * @param roleId
-     * @return
+     * @return Map
      */
     @Override
-    public Map<String, Object> selectRoleById(int roleId) {
+    public Map<String,Object> selectRoleById(int roleId) {
         SysRole sysRole = sysRoleMapper.selectRoleById(roleId);
         Map<String, Object> map = new TreeMap<>();
         map.put("roleName", sysRole.getRoleName());
         List<TreeNode> list = new ArrayList<>();
         List<SysMenu> menus = sysRole.getMenus();
-        for (SysMenu sysMenu : menus) {
-            if (sysMenu.getParentId() == 0) {
-                TreeNode treeNode = new TreeNode(sysMenu.getId(), 0, sysMenu.getType(), sysMenu.getTitle(), sysMenu.getIcon(), sysMenu.getPath(), sysMenu.getSort(), new ArrayList<>());
+        for (SysMenu menu : menus) {
+            if (menu.getParentId() == 0) {
+                TreeNode treeNode = new TreeNode(menu.getId(), 0, menu.getType(), menu.getTitle(), menu.getIcon(), menu.getPath(), menu.getSort(),new ArrayList<>());
                 list.add(treeNode);
             } else {
-                TreeNode treeNode = new TreeNode(sysMenu.getId(), sysMenu.getParentId(), sysMenu.getType(), sysMenu.getTitle(), sysMenu.getIcon(), sysMenu.getPath(), sysMenu.getSort(), new ArrayList<>());
+                TreeNode treeNode = new TreeNode(menu.getId(), menu.getParentId(), menu.getType(), menu.getTitle(), menu.getIcon(), menu.getPath(), menu.getSort(),new ArrayList<>());
                 list.add(treeNode);
             }
         }
-
         List<TreeNode> trees = TreeBuilder.buildTreeByLoop(list);
         map.put("menus", trees);
         return map;
     }
 
-    /**
-     * 检查roleId是否在roles中存在
-     *
-     * @param roles
-     * @param roldId
-     * @return
-     */
     @Override
-    public boolean checkRole(List<SysRole> roles, int roldId) {
+    public boolean checkRole(List<SysRole> roles, int roleId) {
         boolean flag = false;
         for (SysRole role : roles) {
-            if (roldId == role.getRoleId()) {
+            if (roleId == role.getRoleId()) {
                 flag = true;
                 break;
             }
