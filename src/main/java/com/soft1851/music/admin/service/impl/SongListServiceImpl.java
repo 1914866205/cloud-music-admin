@@ -111,5 +111,13 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
         return songLists;
 
     }
-
+    /**
+     * 根据id删除歌单
+     * @param songListId
+     * @return
+     */
+    @Override
+    public int deleteSongListById(String songListId) {
+        return songListMapper.deleteById(songListId);
+    }
 }

@@ -45,4 +45,10 @@ public interface SongListService extends IService<SongList> {
      */
     List<SongList> blurSelect(String field);
 
+    /**
+     * 根据id删除歌曲
+     * @param songListId
+     * @return
+     */
+     int deleteSongListById(String songListId);
 }

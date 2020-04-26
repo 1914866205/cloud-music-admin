@@ -81,8 +81,21 @@ public class SongListController {
     @GetMapping("/blur")
     List<SongList> blurSelect(@Param("field") String field) {
         log.info("*********");
-        log.info("迷糊查询");
+        log.info("模糊查询");
         log.info("---------");
         return songListService.blurSelect(field);
+    }
+
+    /**
+     * 根据id删除
+     * @param songListId
+     * @return
+     */
+    @GetMapping("/deleteById")
+    int deleteBySongId(@Param("songListId") String songListId) {
+        log.info("*********");
+        log.info("进入删除");
+        log.info("---------");
+        return songListService.deleteSongListById(songListId);
     }
 }
