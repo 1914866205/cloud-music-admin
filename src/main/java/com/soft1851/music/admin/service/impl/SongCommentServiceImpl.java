@@ -1,6 +1,6 @@
 package com.soft1851.music.admin.service.impl;
 
-import com.soft1851.music.admin.entity.SongComment;
+import com.soft1851.music.admin.domain.entity.SongComment;
 import com.soft1851.music.admin.mapper.SongCommentMapper;
 import com.soft1851.music.admin.service.SongCommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

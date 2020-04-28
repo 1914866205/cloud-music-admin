@@ -3,7 +3,7 @@
 <mapper namespace="com.soft1851.music.admin.mapper.SongLikeMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.SongLike">
+    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.domain.entity.SongLike">
         <id column="like_id" property="likeId" />
         <result column="user_id" property="userId" />
         <result column="song_id" property="songId" />

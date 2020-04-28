@@ -4,18 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.soft1851.music.admin.common.ResultCode;
-import com.soft1851.music.admin.entity.SongList;
+import com.soft1851.music.admin.domain.entity.SongList;
 import com.soft1851.music.admin.exception.CustomException;
 import com.soft1851.music.admin.mapper.SongListMapper;
 import com.soft1851.music.admin.service.SongListService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * <p>

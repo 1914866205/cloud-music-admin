@@ -2,8 +2,9 @@ package com.soft1851.music.admin.interceptor;
 
 import com.alibaba.fastjson.JSONArray;
 import com.soft1851.music.admin.common.ResultCode;
-import com.soft1851.music.admin.entity.SysRole;
+import com.soft1851.music.admin.domain.entity.SysRole;
 import com.soft1851.music.admin.exception.JwtException;
+import com.soft1851.music.admin.service.RedisService;
 import com.soft1851.music.admin.service.SysAdminService;
 import com.soft1851.music.admin.service.SysRoleService;
 import com.soft1851.music.admin.util.JwtTokenUtil;
@@ -29,7 +30,8 @@ import java.util.List;
 public class JwtInterceptor implements HandlerInterceptor {
     @Resource
     private SysRoleService sysRoleService;
-//    private SysAdminService sysAdminService;
+    @Resource
+    private RedisService redisService;
 
     /**
      * 前置处理，拦截请求
@@ -51,12 +53,17 @@ public class JwtInterceptor implements HandlerInterceptor {
         } else {
             //已经登录
             log.info("## token={}", token);
+            //从请求头中取出ip
+            String userIp = request.getHeader("userIp");
             //鉴权
 //            //根据id查到权限
 //            String getAdminMenuByAdminId = sysAdminService.getAdminMenuByAdminId(JwtTokenUtil.getUserId(token)).toString();
             //查询token的权限
+            //用这个secrect私钥从token中解析出roles字符串
+            String secrect = redisService.getValue(userIp,String.class);
+            System.out.println("secret"+secrect);
             //从token中解析出rolds字符串
-            String tokenRole=JwtTokenUtil.getUserRole(token);
+            String tokenRole=JwtTokenUtil.getUserRole(token,secrect);
             log.info("## tokenRole={}",tokenRole);
 //            反序列化成List
             List<SysRole> roleList = JSONArray.parseArray(tokenRole, SysRole.class);
@@ -76,15 +83,15 @@ public class JwtInterceptor implements HandlerInterceptor {
                 throw new JwtException("用户权限不足", ResultCode.PERMISSION_NO_ACCESS);
             } else {
                 //@Description 到期时间在当前时间之前
-                if (JwtTokenUtil.isExpiration(token)) {
-                    log.info("### token已失效 ###");
+//                if (JwtTokenUtil.isExpiration(token)) {
+//                    log.info("### token已失效 ###");
                     //通过自定义异常抛出token失效的信息，由全局统一处理
-                    throw new JwtException("token已失效", ResultCode.USER_TOKEN_EXPIRES);
-                } else {
+//                    throw new JwtException("token已失效", ResultCode.USER_TOKEN_EXPIRES);
+//                } else {
                     log.info("通过认证，放行到controller层");
                     //通过认证，放行到controller层
                     return true;
-                }
+//                }
             }
         }
     }

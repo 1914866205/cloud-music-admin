@@ -3,9 +3,10 @@ package com.soft1851.music.admin.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.soft1851.music.admin.common.ResponseResult;
-import com.soft1851.music.admin.dto.LoginDto;
-import com.soft1851.music.admin.entity.SysAdmin;
-import com.soft1851.music.admin.entity.SysRole;
+import com.soft1851.music.admin.domain.dto.LoginDto;
+import com.soft1851.music.admin.domain.entity.SysAdmin;
+import com.soft1851.music.admin.domain.entity.SysRole;
+import com.soft1851.music.admin.service.RedisService;
 import com.soft1851.music.admin.service.SysAdminService;
 import com.soft1851.music.admin.util.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,8 @@ public class SysAdminController {
     @Resource
     private SysAdminService sysAdminService;
 
+    @Resource
+    private RedisService redisService;
     @PostMapping("/login")
     public Map login(@RequestBody LoginDto loginDto) {
 //    public Map login(LoginDto loginDto) {
@@ -46,8 +49,12 @@ public class SysAdminController {
             List<SysRole> roles = admin.getRoles();
             String roleString = JSONObject.toJSONString(roles);
             log.info("管理员角色列表：" + roleString);
+            //将盐加入到redis缓存  因为验证码已使用，所以不需要了
+            redisService.set(loginDto.getUserIp(), admin.getSalt(), 10L);
+            System.out.println(redisService.getValue(loginDto.getUserIp(),String.class));
             //将该管理员 的所有角色的集合roles存入token,在后面鉴权的时候查找,有效时间为10分钟
-            String token = JwtTokenUtil.getToken(admin.getId(), JSONObject.toJSONString(roles), new Date(System.currentTimeMillis() + 10L * 60L * 1000L));
+            System.out.println(admin);
+            String token = JwtTokenUtil.getToken(admin.getId(), JSONObject.toJSONString(roles),admin.getSalt(), new Date(System.currentTimeMillis() + 10L * 60L * 1000L));
             map.put("admin", admin);
             log.info(token);
             map.put("token", token);

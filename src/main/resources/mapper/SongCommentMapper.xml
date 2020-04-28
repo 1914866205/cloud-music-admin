@@ -3,7 +3,7 @@
 <mapper namespace="com.soft1851.music.admin.mapper.SongCommentMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.SongComment">
+    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.domain.entity.SongComment">
         <id column="id" property="id" />
         <result column="song_id" property="songId" />
         <result column="user_id" property="userId" />

@@ -1,10 +1,8 @@
 package com.soft1851.music.admin.service;
 
-import com.soft1851.music.admin.dto.LoginDto;
-import com.soft1851.music.admin.entity.SysAdmin;
+import com.soft1851.music.admin.domain.dto.LoginDto;
+import com.soft1851.music.admin.domain.entity.SysAdmin;
 import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.Map;
 
 /**
  * <p>

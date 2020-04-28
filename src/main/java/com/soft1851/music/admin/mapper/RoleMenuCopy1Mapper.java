@@ -1,6 +1,6 @@
 package com.soft1851.music.admin.mapper;
 
-import com.soft1851.music.admin.entity.RoleMenuCopy1;
+import com.soft1851.music.admin.domain.entity.RoleMenuCopy1;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

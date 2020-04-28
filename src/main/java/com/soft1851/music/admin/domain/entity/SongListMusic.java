@@ -1,4 +1,4 @@
-package com.soft1851.music.admin.entity;
+package com.soft1851.music.admin.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -21,40 +21,28 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("song_type")
-public class SongType extends Model<SongType> {
+@TableName("song_list_music")
+public class SongListMusic extends Model<SongListMusic> {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 类型id
+     * id
      */
-    @TableId("type_id")
-    private String typeId;
+    @TableId("id")
+    private String id;
 
     /**
-     *  类型名称
+     * 歌曲歌单id
      */
-    @TableField("type_name")
-    private String typeName;
+    @TableField("song_list_id")
+    private String songListId;
 
     /**
-     * 歌曲数量
+     * 歌曲id
      */
-    @TableField("song_count")
-    private Integer songCount;
-
-    /**
-     * 删除标志
-     */
-    @TableField("delete_flag")
-    private String deleteFlag;
-
-    /**
-     * 修改时间
-     */
-    @TableField("update_time")
-    private LocalDateTime updateTime;
+    @TableField("song_id")
+    private String songId;
 
     /**
      * 创建时间
@@ -63,15 +51,21 @@ public class SongType extends Model<SongType> {
     private LocalDateTime createTime;
 
     /**
-     * 分类
+     * 更新时间
      */
-    @TableField("type")
-    private Integer type;
+    @TableField("update_time")
+    private LocalDateTime updateTime;
+
+    /**
+     * 榜单排名
+     */
+    @TableField("ratio")
+    private Integer ratio;
 
 
     @Override
     protected Serializable pkVal() {
-        return this.typeId;
+        return this.id;
     }
 
 }

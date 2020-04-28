@@ -1,9 +1,9 @@
-package com.soft1851.music.admin.entity;
+package com.soft1851.music.admin.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
@@ -21,34 +21,46 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("role_menu_copy1")
-public class RoleMenuCopy1 extends Model<RoleMenuCopy1> {
+@TableName("video_comment")
+public class VideoComment extends Model<VideoComment> {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键
+     * id
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    @TableId("id")
+    private String id;
 
     /**
-     * 角色id
+     * 视频id
      */
-    @TableField("role_id")
-    private Integer roleId;
+    @TableField("video_id")
+    private String videoId;
 
     /**
-     * 资源id
+     * 评论id
      */
-    @TableField("menu_id")
-    private Integer menuId;
+    @TableField("comment_id")
+    private String commentId;
 
     /**
-     * 角色对资源的细粒度按钮权限
+     * 评论内容
      */
-    @TableField("permissions")
-    private String permissions;
+    @TableField("comment_contetn")
+    private String commentContetn;
+
+    /**
+     * 创建时间
+     */
+    @TableField("create_time")
+    private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    @TableField("update_time")
+    private LocalDateTime updateTime;
 
 
     @Override

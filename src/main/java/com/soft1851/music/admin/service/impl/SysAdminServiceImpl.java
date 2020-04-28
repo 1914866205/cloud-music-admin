@@ -1,28 +1,17 @@
 package com.soft1851.music.admin.service.impl;
 
-import com.soft1851.music.admin.common.ResponseResult;
 import com.soft1851.music.admin.common.ResultCode;
-import com.soft1851.music.admin.dto.LoginDto;
-import com.soft1851.music.admin.entity.SysAdmin;
+import com.soft1851.music.admin.domain.dto.LoginDto;
+import com.soft1851.music.admin.domain.entity.SysAdmin;
 import com.soft1851.music.admin.exception.CustomException;
 import com.soft1851.music.admin.mapper.SysAdminMapper;
-import com.soft1851.music.admin.mapper.SysMenuMapper;
 import com.soft1851.music.admin.service.SysAdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.soft1851.music.admin.util.JwtTokenUtil;
 import com.soft1851.music.admin.util.Md5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>

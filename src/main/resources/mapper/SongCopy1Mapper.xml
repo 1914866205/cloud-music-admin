@@ -3,7 +3,7 @@
 <mapper namespace="com.soft1851.music.admin.mapper.SongCopy1Mapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.SongCopy1">
+    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.domain.entity.SongCopy1">
         <id column="song_id" property="songId" />
         <result column="song_name" property="songName" />
         <result column="sort_id" property="sortId" />

@@ -3,7 +3,7 @@
 <mapper namespace="com.soft1851.music.admin.mapper.VideoCommentMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.VideoComment">
+    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.domain.entity.VideoComment">
         <id column="id" property="id" />
         <result column="video_id" property="videoId" />
         <result column="comment_id" property="commentId" />

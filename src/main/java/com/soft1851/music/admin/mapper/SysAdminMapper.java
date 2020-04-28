@@ -1,13 +1,9 @@
 package com.soft1851.music.admin.mapper;
 
-import com.soft1851.music.admin.entity.SysAdmin;
+import com.soft1851.music.admin.domain.entity.SysAdmin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * <p>

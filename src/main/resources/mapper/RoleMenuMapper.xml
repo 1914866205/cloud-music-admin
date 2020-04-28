@@ -3,7 +3,7 @@
 <mapper namespace="com.soft1851.music.admin.mapper.RoleMenuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.RoleMenu">
+    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.domain.entity.RoleMenu">
         <id column="id" property="id" />
         <result column="role_id" property="roleId" />
         <result column="menu_id" property="menuId" />

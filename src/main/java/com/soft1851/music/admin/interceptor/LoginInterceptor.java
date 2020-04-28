@@ -2,7 +2,6 @@ package com.soft1851.music.admin.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
 import com.soft1851.music.admin.common.ResultCode;
-import com.soft1851.music.admin.dto.LoginDto;
 import com.soft1851.music.admin.exception.CustomException;
 import com.soft1851.music.admin.handler.RequestWrapper;
 import com.soft1851.music.admin.service.RedisService;

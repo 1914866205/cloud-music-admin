@@ -1,6 +1,6 @@
 package com.soft1851.music.admin.mapper;
 
-import com.soft1851.music.admin.entity.SysMenu;
+import com.soft1851.music.admin.domain.entity.SysMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;

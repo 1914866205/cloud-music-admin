@@ -1,4 +1,4 @@
-package com.soft1851.music.admin.entity;
+package com.soft1851.music.admin.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -6,9 +6,6 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -24,36 +21,39 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("sys_role")
-public class SysRole extends Model<SysRole> {
+@TableName("role_menu_copy1")
+public class RoleMenuCopy1 extends Model<RoleMenuCopy1> {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键
      */
-    @TableId(value = "role_id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
+    /**
+     * 角色id
+     */
+    @TableField("role_id")
     private Integer roleId;
 
     /**
-     * 角色名称
+     * 资源id
      */
-    @TableField("role_name")
-    private String roleName;
+    @TableField("menu_id")
+    private Integer menuId;
 
     /**
-     * 角色描述
+     * 角色对资源的细粒度按钮权限
      */
-    @JsonIgnore
-    @TableField("description")
-    private String description;
+    @TableField("permissions")
+    private String permissions;
 
-    @JsonIgnore
-    private List<SysMenu> menus;
 
     @Override
     protected Serializable pkVal() {
-        return this.roleId;
+        return this.id;
     }
 
 }

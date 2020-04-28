@@ -3,7 +3,7 @@
 <mapper namespace="com.soft1851.music.admin.mapper.VideoMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.Video">
+    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.domain.entity.Video">
         <id column="video_id" property="videoId" />
         <result column="video_name" property="videoName" />
         <result column="duration" property="duration" />

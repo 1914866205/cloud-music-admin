@@ -1,17 +1,6 @@
 package com.soft1851.music.admin.service;
 
-import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.soft1851.music.admin.dto.LoginDto;
-import com.soft1851.music.admin.mapper.SysAdminMapper;
-import com.soft1851.music.admin.util.Md5Util;
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.annotation.Resource;
-
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class SysAdminServiceTest {

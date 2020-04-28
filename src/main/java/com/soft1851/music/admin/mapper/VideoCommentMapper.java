@@ -1,6 +1,6 @@
 package com.soft1851.music.admin.mapper;
 
-import com.soft1851.music.admin.entity.VideoComment;
+import com.soft1851.music.admin.domain.entity.VideoComment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

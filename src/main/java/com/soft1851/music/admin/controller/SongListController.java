@@ -1,7 +1,7 @@
 package com.soft1851.music.admin.controller;
 
 
-import com.soft1851.music.admin.entity.SongList;
+import com.soft1851.music.admin.domain.entity.SongList;
 import com.soft1851.music.admin.service.SongListService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;

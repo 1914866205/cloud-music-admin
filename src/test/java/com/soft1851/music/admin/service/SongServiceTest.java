@@ -25,4 +25,9 @@ class SongServiceTest {
         System.out.println("*******************");
         System.out.println("*******************");
     }
+
+    @Test
+    void exportData(){
+        songService.exportData();
+    }
 }

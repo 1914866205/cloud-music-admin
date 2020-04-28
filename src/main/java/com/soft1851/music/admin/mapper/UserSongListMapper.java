@@ -1,6 +1,6 @@
 package com.soft1851.music.admin.mapper;
 
-import com.soft1851.music.admin.entity.UserSongList;
+import com.soft1851.music.admin.domain.entity.UserSongList;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

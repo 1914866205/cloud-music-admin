@@ -3,7 +3,7 @@
 <mapper namespace="com.soft1851.music.admin.mapper.SysAdminMapper">
 
     <!--    &lt;!&ndash; 通用查询映射结果 &ndash;&gt;-->
-    <!--    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.SysAdmin">-->
+    <!--    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.domain.entity.SysAdmin">-->
     <!--        <id column="id" property="id" />-->
     <!--        <result column="name" property="name" />-->
     <!--        <result column="password" property="password" />-->
@@ -22,18 +22,19 @@
     <!--                        WHERE t2.admin_id=#{adminId}-->
     <!--    </select>-->
 
-    <resultMap id="adminMap" type="com.soft1851.music.admin.entity.SysAdmin">
+    <resultMap id="adminMap" type="com.soft1851.music.admin.domain.entity.SysAdmin">
         <result property="id" column="id" javaType="java.lang.String"/>
         <result property="name" column="name" javaType="java.lang.String"/>
+        <result property="salt" column="salt" javaType="java.lang.String"/>
         <result property="avatar" column="avatar" javaType="java.lang.String"/>
-        <collection property="roles" ofType="com.soft1851.music.admin.entity.SysRole">
+        <collection property="roles" ofType="com.soft1851.music.admin.domain.entity.SysRole">
             <result property="roleId" column="role_id" javaType="java.lang.Integer"/>
             <result property="roleName" column="role_name" javaType="java.lang.String"/>
         </collection>
     </resultMap>
 
     <select id="selectByName" resultMap="adminMap">
-        SELECT t1.id, t1.name, t1.avatar, t3.role_id, t3.role_name
+        SELECT t1.id, t1.name,t1.salt, t1.avatar, t3.role_id, t3.role_name
         FROM sys_admin t1,
              role_admin t2,
              sys_role t3

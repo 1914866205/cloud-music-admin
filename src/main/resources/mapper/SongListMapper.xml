@@ -3,7 +3,7 @@
 <mapper namespace="com.soft1851.music.admin.mapper.SongListMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.SongList">
+    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.domain.entity.SongList">
         <id column="song_list_id" property="songListId" />
         <result column="song_list_name" property="songListName" />
         <result column="thumbnail" property="thumbnail" />

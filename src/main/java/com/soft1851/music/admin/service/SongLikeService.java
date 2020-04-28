@@ -1,6 +1,6 @@
 package com.soft1851.music.admin.service;
 
-import com.soft1851.music.admin.entity.SongLike;
+import com.soft1851.music.admin.domain.entity.SongLike;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
