@@ -3,6 +3,7 @@ package com.soft1851.music.admin.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.soft1851.music.admin.common.ResponseResult;
+import com.soft1851.music.admin.common.ResultCode;
 import com.soft1851.music.admin.domain.dto.LoginDto;
 import com.soft1851.music.admin.domain.entity.SysAdmin;
 import com.soft1851.music.admin.domain.entity.SysRole;
@@ -85,6 +86,12 @@ public class SysAdminController {
         log.info("*******************");
         log.info(sysAdmin.toString());
         log.info("*******************");
+        if (sysAdmin.getName()==null&&sysAdmin.getName().length()<4){
+            return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
+        }
+        if (sysAdmin.getPassword()==null&&sysAdmin.getPassword().length()>50&&sysAdmin.getPassword().length()<6){
+            return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
+        }
         return ResponseResult.success(sysAdminService.setAdminInfo(sysAdmin));
     }
 }

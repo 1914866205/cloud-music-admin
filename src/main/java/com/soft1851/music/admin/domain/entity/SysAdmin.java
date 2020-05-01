@@ -8,10 +8,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * <p>
@@ -38,6 +40,8 @@ public class SysAdmin extends Model<SysAdmin> {
     /**
      * 用户名
      */
+    @Size(min = 4,max = 20)
+    @NotNull
     @TableField("name")
     private String name;
 
@@ -46,6 +50,8 @@ public class SysAdmin extends Model<SysAdmin> {
      */
     //加上此注解，不会被客户端看到
 //    @JsonIgnore
+    @Size(min = 4,max = 50)
+    @NotNull
     @TableField("password")
     private String password;
 

@@ -46,6 +46,9 @@ public class JwtInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获取token
         String token = request.getHeader("Authorization");
+        if (token==null){
+            token=request.getParameter("Authorization");
+        }
         //认证
         if (token == null) {
             log.info("### 用户未登录，请先登录 ###");
@@ -56,6 +59,9 @@ public class JwtInterceptor implements HandlerInterceptor {
             log.info("## token={}", token);
             //从请求头中取出ip
             String userIp = request.getHeader("userIp");
+            if (userIp==null){
+                userIp=request.getParameter("userIp");
+            }
             //鉴权
 //            //根据id查到权限
 //            String getAdminMenuByAdminId = sysAdminService.getAdminMenuByAdminId(JwtTokenUtil.getUserId(token)).toString();
