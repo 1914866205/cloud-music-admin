@@ -35,6 +35,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     /**
      * 前置处理，拦截请求
+     *
      * @param request
      * @param response
      * @param handler
@@ -60,16 +61,20 @@ public class JwtInterceptor implements HandlerInterceptor {
 //            String getAdminMenuByAdminId = sysAdminService.getAdminMenuByAdminId(JwtTokenUtil.getUserId(token)).toString();
             //查询token的权限
             //用这个secrect私钥从token中解析出roles字符串
-            String secrect = redisService.getValue(userIp,String.class);
-            System.out.println("secret"+secrect);
+            System.out.println("userIp" + userIp);
+            String secrect = redisService.getValue(userIp, String.class);
+            System.out.println("secret" + secrect);
             //从token中解析出rolds字符串
-            String tokenRole=JwtTokenUtil.getUserRole(token,secrect);
-            log.info("## tokenRole={}",tokenRole);
+            String tokenRole = JwtTokenUtil.getUserRole(token, secrect);
+            log.info("## tokenRole={}", tokenRole);
 //            反序列化成List
             List<SysRole> roleList = JSONArray.parseArray(tokenRole, SysRole.class);
             //从request中取出客户端传来的roleId
-            String roleId=request.getParameter("roleId");
-            log.info("## roleId={}",roleId);
+            String roleId = request.getParameter("roleId");
+            if (roleId == null) {
+                roleId = request.getHeader("roleId");
+            }
+            log.info("## roleId={}", roleId);
             //到 roles中查找对比，此部分代码在SysRoleService
             boolean flag = sysRoleService.checkRole(roleList, Integer.parseInt(roleId));
             log.info("## flag={}", flag);
@@ -85,16 +90,17 @@ public class JwtInterceptor implements HandlerInterceptor {
                 //@Description 到期时间在当前时间之前
 //                if (JwtTokenUtil.isExpiration(token)) {
 //                    log.info("### token已失效 ###");
-                    //通过自定义异常抛出token失效的信息，由全局统一处理
+                //通过自定义异常抛出token失效的信息，由全局统一处理
 //                    throw new JwtException("token已失效", ResultCode.USER_TOKEN_EXPIRES);
 //                } else {
-                    log.info("通过认证，放行到controller层");
-                    //通过认证，放行到controller层
-                    return true;
+                log.info("通过认证，放行到controller层");
+                //通过认证，放行到controller层
+                return true;
 //                }
             }
         }
     }
+
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 

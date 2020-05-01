@@ -4,6 +4,7 @@ import com.soft1851.music.admin.domain.entity.SysAdmin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * <p>
@@ -37,5 +38,15 @@ public interface SysAdminMapper extends BaseMapper<SysAdmin> {
      */
     @Select("SELECT * FROM sys_admin WHERE name = #{name}")
     SysAdmin getSysAdminByName(@Param("name") String name);
+
+    /**
+     * 设置用户信息
+     * @param sysAdmin
+     * @return
+     */
+    int setSysAdmin(SysAdmin sysAdmin);
+
+    @Select("SELECT id,name,password,salt,avatar,create_time,update_time,status FROM sys_admin WHERE id = #{id}")
+    SysAdmin selectByAdminId(@Param("id") String id);
 
 }

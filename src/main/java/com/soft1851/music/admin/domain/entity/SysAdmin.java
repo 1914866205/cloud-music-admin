@@ -45,7 +45,7 @@ public class SysAdmin extends Model<SysAdmin> {
      * 密码
      */
     //加上此注解，不会被客户端看到
-    @JsonIgnore
+//    @JsonIgnore
     @TableField("password")
     private String password;
 
@@ -65,7 +65,7 @@ public class SysAdmin extends Model<SysAdmin> {
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private  LocalDateTime createTime;
 
     /**
      * 更新时间

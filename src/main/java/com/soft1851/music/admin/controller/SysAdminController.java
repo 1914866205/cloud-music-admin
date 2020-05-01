@@ -35,6 +35,7 @@ public class SysAdminController {
 
     @Resource
     private RedisService redisService;
+
     @PostMapping("/login")
     public Map login(@RequestBody LoginDto loginDto) {
 //    public Map login(LoginDto loginDto) {
@@ -53,10 +54,10 @@ public class SysAdminController {
             log.info("管理员角色列表：" + roleString);
             //将盐加入到redis缓存  因为验证码已使用，所以不需要了
             redisService.set(loginDto.getUserIp(), admin.getSalt(), 10L);
-            System.out.println(redisService.getValue(loginDto.getUserIp(),String.class));
+            System.out.println(redisService.getValue(loginDto.getUserIp(), String.class));
             //将该管理员 的所有角色的集合roles存入token,在后面鉴权的时候查找,有效时间为10分钟
             System.out.println(admin);
-            String token = JwtTokenUtil.getToken(admin.getId(), JSONObject.toJSONString(roles),admin.getSalt(), new Date(System.currentTimeMillis() + 10L * 60L * 1000L));
+            String token = JwtTokenUtil.getToken(admin.getId(), JSONObject.toJSONString(roles), admin.getSalt(), new Date(System.currentTimeMillis() + 10L * 60L * 1000L));
             map.put("admin", admin);
             log.info(token);
             map.put("token", token);
@@ -71,5 +72,19 @@ public class SysAdminController {
         log.info("鉴权成功");
         System.out.println(sysAdminService.getAdminAndRolesByName(name));
         return ResponseResult.success(sysAdminService.getAdminAndRolesByName(name));
+    }
+
+    @GetMapping("/adminInfo")
+    public SysAdmin getAdminInfo(@Param("name") String name) {
+        log.info("查看用户信息");
+        return sysAdminService.getAdminByName(name);
+    }
+
+    @PostMapping("/setAdminInfo")
+    public ResponseResult setAdminInfo(@RequestBody SysAdmin sysAdmin) {
+        log.info("*******************");
+        log.info(sysAdmin.toString());
+        log.info("*******************");
+        return ResponseResult.success(sysAdminService.setAdminInfo(sysAdmin));
     }
 }

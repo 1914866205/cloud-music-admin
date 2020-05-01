@@ -25,6 +25,7 @@
     <resultMap id="adminMap" type="com.soft1851.music.admin.domain.entity.SysAdmin">
         <result property="id" column="id" javaType="java.lang.String"/>
         <result property="name" column="name" javaType="java.lang.String"/>
+        <result property="password" column="password" javaType="java.lang.String"/>
         <result property="salt" column="salt" javaType="java.lang.String"/>
         <result property="avatar" column="avatar" javaType="java.lang.String"/>
         <collection property="roles" ofType="com.soft1851.music.admin.domain.entity.SysRole">
@@ -34,7 +35,7 @@
     </resultMap>
 
     <select id="selectByName" resultMap="adminMap">
-        SELECT t1.id, t1.name,t1.salt, t1.avatar, t3.role_id, t3.role_name
+        SELECT t1.id,t1.password, t1.name,t1.salt, t1.avatar, t3.role_id, t3.role_name
         FROM sys_admin t1,
              role_admin t2,
              sys_role t3
@@ -42,6 +43,14 @@
           AND t2.role_id = t3.role_id
           AND t1.name = #{name}
     </select>
+    <update id="setSysAdmin"  parameterType="com.soft1851.music.admin.domain.entity.SysAdmin" >
+        UPDATE cloud_music.sys_admin
+        SET cloud_music.sys_admin.name=#{name},
+            cloud_music.sys_admin.password=#{password},
+            cloud_music.sys_admin.avatar=#{avatar},
+            cloud_music.sys_admin.update_time=#{updateTime}
+        WHERE cloud_music.sys_admin.id=#{id};
+    </update>
 
 
 </mapper>

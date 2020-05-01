@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -64,6 +66,30 @@ public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> i
     @Override
     public SysAdmin getAdminAndRolesByName(String name) {
         return sysAdminMapper.selectByName(name);
+    }
+
+    @Override
+    public SysAdmin getAdminByName(String name) {
+        return sysAdminMapper.getSysAdminByName(name);
+    }
+
+    @Override
+    public int setAdminInfo(SysAdmin sysAdmin) {
+        log.info("进来啦");
+        SysAdmin sysAdmin1 = sysAdminMapper.selectByAdminId(sysAdmin.getId());
+        log.info("1111" + sysAdmin1);
+        sysAdmin1.setName(sysAdmin.getName());
+        sysAdmin1.setAvatar(sysAdmin.getAvatar());
+        //大写  32位
+        sysAdmin1.setPassword(Md5Util.getMd5(sysAdmin.getPassword(), true, 32));
+        sysAdmin1.setUpdateTime(LocalDateTime.now());
+        log.info("最新信息" + sysAdmin1);
+        return sysAdminMapper.setSysAdmin(sysAdmin1);
+    }
+
+    @Override
+    public SysAdmin getAdminById(String id) {
+        return sysAdminMapper.selectByAdminId(id);
     }
 
 //    @Override

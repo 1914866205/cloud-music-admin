@@ -1,11 +1,25 @@
 package com.soft1851.music.admin.service;
 
+import com.soft1851.music.admin.domain.entity.SysAdmin;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
 
 @SpringBootTest
 class SysAdminServiceTest {
-//    @Resource
-//    private SysAdminService sysAdminService;
+    @Resource
+    private SysAdminService sysAdminService;
+    @Test
+    void getAdminByName(){
+//        SysAdmin sysAdmin = sysAdminService.getAdminByName("taoranran2");
+//        System.out.println(sysAdmin);
+//        sysAdmin.setName("taoranran");
+//        System.out.println(sysAdminService.setAdminInfo(sysAdmin));
+//        System.out.println(sysAdminService.getAdminByName("taoranran"));
+        System.out.println(sysAdminService.getAdminById("22516FB6A9D389D7FC21420806150A7B"));
+    }
+
 //    @Resource
 //    private DefaultKaptcha defaultKaptcha;
 //    @Test

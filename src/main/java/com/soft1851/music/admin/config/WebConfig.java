@@ -32,7 +32,7 @@ public class WebConfig implements WebMvcConfigurer {
 
         //添加验证码的拦截器
         registry.addInterceptor(loginInterceptor).addPathPatterns("/sysAdmin/login");
-//        registry.addInterceptor(loginInterceptor).excludePathPatterns("/**").addPathPatterns("/sysAdmin/login");
+        registry.addInterceptor(loginInterceptor).excludePathPatterns("/**").addPathPatterns("/sysAdmin/login");
     }
 
 

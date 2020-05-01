@@ -45,4 +45,24 @@ public interface SysAdminService extends IService<SysAdmin> {
      * @return
      */
     SysAdmin getAdminAndRolesByName(String name);
+
+    /**
+     * 根据name查询Admin信息
+     * @param name
+     * @return
+     */
+    SysAdmin getAdminByName(String name);
+
+    /**
+     * 修改用户信息
+     * @param sysAdmin
+     */
+    int setAdminInfo(SysAdmin sysAdmin);
+
+    /**
+     * id
+     * @param id
+     * @return
+     */
+    SysAdmin getAdminById(String id);
 }
