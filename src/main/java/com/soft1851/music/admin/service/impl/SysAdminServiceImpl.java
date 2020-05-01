@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft1851.music.admin.util.Md5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 
@@ -23,6 +24,7 @@ import javax.annotation.Resource;
  */
 @Service
 @Slf4j
+@Validated
 public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> implements SysAdminService {
     @Resource
     private SysAdminMapper sysAdminMapper;
@@ -32,7 +34,7 @@ public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> i
 
 
     @Override
-    public boolean isLogin(LoginDto loginDto) {
+    public boolean isLogin(@Validated LoginDto loginDto) {
         SysAdmin admin = sysAdminMapper.getSysAdminByName(loginDto.getUsername());
         if (admin!=null){
             String password = Md5Util.getMd5(loginDto.getPassword(), true, 32);
