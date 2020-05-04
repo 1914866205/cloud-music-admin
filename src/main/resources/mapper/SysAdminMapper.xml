@@ -52,5 +52,11 @@
         WHERE cloud_music.sys_admin.id=#{id};
     </update>
 
-
+    <update id="setSysAdminNoPass"  parameterType="com.soft1851.music.admin.domain.entity.SysAdmin" >
+        UPDATE cloud_music.sys_admin
+        SET cloud_music.sys_admin.name=#{name},
+            cloud_music.sys_admin.avatar=#{avatar},
+            cloud_music.sys_admin.update_time=#{updateTime}
+        WHERE cloud_music.sys_admin.id=#{id};
+    </update>
 </mapper>

@@ -82,16 +82,16 @@ public class SysAdminController {
     }
 
     @PostMapping("/setAdminInfo")
-    public ResponseResult setAdminInfo(@RequestBody SysAdmin sysAdmin) {
+    public ResponseResult setAdminInfo(@RequestBody @Validated SysAdmin sysAdmin) {
         log.info("*******************");
         log.info(sysAdmin.toString());
         log.info("*******************");
-        if (sysAdmin.getName()==null&&sysAdmin.getName().length()<4){
-            return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
-        }
-        if (sysAdmin.getPassword()==null&&sysAdmin.getPassword().length()>50&&sysAdmin.getPassword().length()<6){
-            return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
-        }
+//        if (sysAdmin.getName()==null&&sysAdmin.getName().length()<4){
+//            return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
+//        }
+//        if (sysAdmin.getPassword()==null&&sysAdmin.getPassword().length()>50&&sysAdmin.getPassword().length()<6){
+//            return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
+//        }
         return ResponseResult.success(sysAdminService.setAdminInfo(sysAdmin));
     }
 }

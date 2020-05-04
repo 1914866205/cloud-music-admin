@@ -38,15 +38,15 @@ public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> i
     @Override
     public boolean isLogin(@Validated LoginDto loginDto) {
         SysAdmin admin = sysAdminMapper.getSysAdminByName(loginDto.getUsername());
-        if (admin!=null){
+        if (admin != null) {
             String password = Md5Util.getMd5(loginDto.getPassword(), true, 32);
             if (admin.getPassword().equals(password)) {
                 return true;
-            }else {
+            } else {
                 log.info("密码错误");
                 throw new CustomException("密码错误", ResultCode.USER_PASSWORD_ERROR);
             }
-        }else {
+        } else {
             log.error("用户名不存在");
             throw new CustomException("用户名不存在", ResultCode.USER_NOT_FOUND);
         }
@@ -80,11 +80,17 @@ public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> i
         log.info("1111" + sysAdmin1);
         sysAdmin1.setName(sysAdmin.getName());
         sysAdmin1.setAvatar(sysAdmin.getAvatar());
-        //大写  32位
-        sysAdmin1.setPassword(Md5Util.getMd5(sysAdmin.getPassword(), true, 32));
         sysAdmin1.setUpdateTime(LocalDateTime.now());
-        log.info("最新信息" + sysAdmin1);
-        return sysAdminMapper.setSysAdmin(sysAdmin1);
+        //如果密码没有改，就不能变
+        if (!sysAdmin1.getPassword().equals(sysAdmin.getPassword())) {
+            //大写  32位
+            sysAdmin1.setPassword(Md5Util.getMd5(sysAdmin.getPassword(), true, 32));
+            log.info("最新信息" + sysAdmin1);
+            return sysAdminMapper.setSysAdmin(sysAdmin1);
+        } else {
+            log.info("最新信息" + sysAdmin1);
+            return sysAdminMapper.setSysAdminNoPass(sysAdmin1);
+        }
     }
 
     @Override

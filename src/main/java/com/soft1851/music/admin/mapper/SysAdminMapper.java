@@ -45,6 +45,12 @@ public interface SysAdminMapper extends BaseMapper<SysAdmin> {
      * @return
      */
     int setSysAdmin(SysAdmin sysAdmin);
+    /**
+     * 设置用户信息  不设置密码
+     * @param sysAdmin
+     * @return
+     */
+    int setSysAdminNoPass(SysAdmin sysAdmin);
 
     @Select("SELECT id,name,password,salt,avatar,create_time,update_time,status FROM sys_admin WHERE id = #{id}")
     SysAdmin selectByAdminId(@Param("id") String id);
