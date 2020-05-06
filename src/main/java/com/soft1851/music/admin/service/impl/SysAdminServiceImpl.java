@@ -1,12 +1,12 @@
 package com.soft1851.music.admin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft1851.music.admin.common.ResultCode;
 import com.soft1851.music.admin.domain.dto.LoginDto;
 import com.soft1851.music.admin.domain.entity.SysAdmin;
 import com.soft1851.music.admin.exception.CustomException;
 import com.soft1851.music.admin.mapper.SysAdminMapper;
 import com.soft1851.music.admin.service.SysAdminService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft1851.music.admin.util.Md5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * <p>
@@ -37,7 +36,7 @@ public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> i
 
     @Override
     public boolean isLogin(@Validated LoginDto loginDto) {
-        SysAdmin admin = sysAdminMapper.getSysAdminByName(loginDto.getUsername());
+            SysAdmin admin = sysAdminMapper.getSysAdminByName(loginDto.getUsername());
         if (admin != null) {
             String password = Md5Util.getMd5(loginDto.getPassword(), true, 32);
             if (admin.getPassword().equals(password)) {
@@ -96,6 +95,11 @@ public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> i
     @Override
     public SysAdmin getAdminById(String id) {
         return sysAdminMapper.selectByAdminId(id);
+    }
+
+    @Override
+    public int addAdmin(SysAdmin sysAdmin) {
+        return sysAdminMapper.addAdmin(sysAdmin);
     }
 
 //    @Override

@@ -5,7 +5,6 @@ import com.soft1851.music.admin.common.ResultCode;
 import com.soft1851.music.admin.domain.entity.SysRole;
 import com.soft1851.music.admin.exception.JwtException;
 import com.soft1851.music.admin.service.RedisService;
-import com.soft1851.music.admin.service.SysAdminService;
 import com.soft1851.music.admin.service.SysRoleService;
 import com.soft1851.music.admin.util.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -46,8 +45,8 @@ public class JwtInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获取token
         String token = request.getHeader("Authorization");
-        if (token==null){
-            token=request.getParameter("Authorization");
+        if (token == null) {
+            token = request.getParameter("Authorization");
         }
         //认证
         if (token == null) {
@@ -59,8 +58,8 @@ public class JwtInterceptor implements HandlerInterceptor {
             log.info("## token={}", token);
             //从请求头中取出ip
             String userIp = request.getHeader("userIp");
-            if (userIp==null){
-                userIp=request.getParameter("userIp");
+            if (userIp == null) {
+                userIp = request.getParameter("userIp");
             }
             //鉴权
 //            //根据id查到权限
@@ -70,7 +69,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             System.out.println("userIp" + userIp);
             String secrect = redisService.getValue(userIp, String.class);
             System.out.println("secret" + secrect);
-            //从token中解析出rolds字符串
+            //从tok en中解析出rolds字符串
             String tokenRole = JwtTokenUtil.getUserRole(token, secrect);
             log.info("## tokenRole={}", tokenRole);
 //            反序列化成List
@@ -79,6 +78,9 @@ public class JwtInterceptor implements HandlerInterceptor {
             String roleId = request.getParameter("roleId");
             if (roleId == null) {
                 roleId = request.getHeader("roleId");
+            }
+            if ((roleId==null)){
+                roleId = roleList.get(0).getRoleId().toString();
             }
             log.info("## roleId={}", roleId);
             //到 roles中查找对比，此部分代码在SysRoleService

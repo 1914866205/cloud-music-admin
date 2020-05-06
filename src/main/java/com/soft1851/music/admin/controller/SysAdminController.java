@@ -3,7 +3,6 @@ package com.soft1851.music.admin.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.soft1851.music.admin.common.ResponseResult;
-import com.soft1851.music.admin.common.ResultCode;
 import com.soft1851.music.admin.domain.dto.LoginDto;
 import com.soft1851.music.admin.domain.entity.SysAdmin;
 import com.soft1851.music.admin.domain.entity.SysRole;
@@ -16,7 +15,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.*;
 
 /**

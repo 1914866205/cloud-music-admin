@@ -1,16 +1,20 @@
 package com.soft1851.music.admin.service;
 
-import com.soft1851.music.admin.domain.entity.RoleAdmin;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.soft1851.music.admin.domain.entity.RoleAdmin;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author ntt
  * @since 2020-04-21
  */
 public interface RoleAdminService extends IService<RoleAdmin> {
-
+    /**
+     * 添加用户权限
+     * @return
+     */
+    int addRoleAdmin(RoleAdmin roleAdmin);
 }

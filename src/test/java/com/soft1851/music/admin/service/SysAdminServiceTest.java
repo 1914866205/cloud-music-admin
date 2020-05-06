@@ -1,23 +1,54 @@
 package com.soft1851.music.admin.service;
 
 import com.soft1851.music.admin.domain.entity.SysAdmin;
+import com.soft1851.music.admin.util.Md5Util;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @SpringBootTest
 class SysAdminServiceTest {
     @Resource
     private SysAdminService sysAdminService;
+    @Resource
+    private DataSource dataSource;
     @Test
     void getAdminByName(){
 //        SysAdmin sysAdmin = sysAdminService.getAdminByName("taoranran2");
 //        System.out.println(sysAdmin);
 //        sysAdmin.setName("taoranran");
 //        System.out.println(sysAdminService.setAdminInfo(sysAdmin));
+//        System.out.println(dataSource.getClass());
 //        System.out.println(sysAdminService.getAdminByName("taoranran"));
-        System.out.println(sysAdminService.getAdminById("22516FB6A9D389D7FC21420806150A7B"));
+//        System.out.println(sysAdminService.getAdminById("22516FB6A9D389D7FC21420806150A7B"));
+//            String t="2019-12-04T01:52:21Z";
+//        System.out.println(t.replace("T"," ").substring(0,t.length()-1));
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        String timeStr = "2019-01-01 00:00:00";
+//        LocalDateTime dateTime = LocalDateTime.parse(timeStr, formatter);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime time = LocalDateTime.now();
+        String createTimeStr = "2020-05-06 07:34:15";
+        String updateTimeStr = "2020-05-06 07:34:15";
+        LocalDateTime createTimeLDT = LocalDateTime.parse(createTimeStr,df);
+        LocalDateTime updateTimeLDT = LocalDateTime.parse(updateTimeStr,df);
+//
+
+        SysAdmin sysAdmin=SysAdmin.builder()
+                .id("C8651E6614")
+                .name("1914866205")
+                .password("E10ADC3949BA59ABBE56E057F20F883E")
+                .salt("C33367701511B4F6020EC61DED352059")
+                .avatar("https://avatars2.githubusercontent.com/u/58495771?v=4")
+                .createTime(createTimeLDT)
+                .updateTime(updateTimeLDT)
+                .status(1)
+                .build();
+         sysAdminService.addAdmin(sysAdmin);
     }
 
 //    @Resource

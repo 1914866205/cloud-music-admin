@@ -1,8 +1,8 @@
 package com.soft1851.music.admin.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft1851.music.admin.domain.dto.LoginDto;
 import com.soft1851.music.admin.domain.entity.SysAdmin;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -65,4 +65,7 @@ public interface SysAdminService extends IService<SysAdmin> {
      * @return
      */
     SysAdmin getAdminById(String id);
+
+
+    int addAdmin(SysAdmin sysAdmin);
 }
