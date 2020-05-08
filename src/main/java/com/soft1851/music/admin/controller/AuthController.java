@@ -135,6 +135,7 @@ public class AuthController {
                         .createTime(createTimeLDT)
                         .updateTime(updateTimeLDT)
                         .status(1)
+                        .githubName(jsonObject.getString("login"))
                         .build();
                 log.info(sysAdmin.toString());
                 final int num1 = sysAdminService.addAdmin(sysAdmin);
@@ -145,9 +146,10 @@ public class AuthController {
                 final int num2 = roleAdminService.addRoleAdmin(RoleAdmin.builder().adminId(Md5Util.getMd5(jsonObject.getString("id"), true, 32)).roleId("1").build());
                 log.info("是否成功添加用户权限{}", num2);
             }
+
             //    302  重定向
-//            response.sendRedirect("http://localhost:8081/#/auth/user=" + user);
-            response.sendRedirect("http://localhost:8081/#/login");
+            response.sendRedirect("http://localhost:8081/#/auth?user=" + user);
+//            response.sendRedirect("http://localhost:8081/#/login?code="+code);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.soft1851.music.admin.controller;
 
 
+import com.soft1851.music.admin.common.ResponseResult;
 import com.soft1851.music.admin.domain.entity.Song;
 import com.soft1851.music.admin.service.SongService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author ntt
@@ -28,6 +29,7 @@ import java.util.Map;
 public class SongController {
     @Resource
     private SongService songService;
+
     /**
      * 查询所有歌曲
      *
@@ -56,8 +58,10 @@ public class SongController {
         log.info("---------");
         return songService.getByPage(currentPage, size);
     }
+
     /**
      * 根据id删除
+     *
      * @param songId
      * @return
      */
@@ -67,5 +71,13 @@ public class SongController {
         log.info("进入删除");
         log.info("---------");
         return songService.deleteSongById(songId);
+    }
+
+    /**
+     * 导出作业
+     */
+    @GetMapping("/export")
+    public ResponseResult export(){
+        return ResponseResult.success(songService.exportData());
     }
 }

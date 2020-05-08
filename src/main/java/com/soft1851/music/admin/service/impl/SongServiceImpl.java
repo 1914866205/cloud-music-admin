@@ -91,7 +91,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
 
     @SneakyThrows
     @Override
-    public void exportData() {
+    public String exportData() {
         String excelPath = "D:\\360MoveData\\Users\\lenovo\\Desktop\\数据导出.xlsx";
         //导出excel对象
         SXSSFWorkbook sxssfWorkbook = new SXSSFWorkbook(1000);
@@ -109,6 +109,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         sxssfWorkbook.write(outputStream);
         outputStream.flush();
         outputStream.close();
+        return "导出成功";
     }
 
     private void produceExportData(ExportDataAdapter<Song> exportDataAdapter, CountDownLatch latch) {

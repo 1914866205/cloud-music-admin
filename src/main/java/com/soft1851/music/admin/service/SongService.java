@@ -54,5 +54,5 @@ public interface SongService extends IService<Song> {
     /**
      * 导出数据
      */
-    void exportData();
+    String exportData();
 }

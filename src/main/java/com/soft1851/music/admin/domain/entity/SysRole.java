@@ -49,7 +49,9 @@ public class SysRole extends Model<SysRole> {
     @JsonIgnore
     @TableField("description")
     private String description;
-
+    
+//    该注解用于数据库不存在的属性
+//    @TableField(exist = false)
     @JsonIgnore
     private List<SysMenu> menus;
 

@@ -87,6 +87,12 @@ public class SysAdmin extends Model<SysAdmin> {
     @TableField("status")
     private Integer status;
 
+    /**
+     * github账号
+     */
+    @TableField("github_name")
+    private String githubName;
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -94,6 +100,8 @@ public class SysAdmin extends Model<SysAdmin> {
 
     /**
      * 权限集合
+     * 该注解用于数据库不存在的属性
      */
+//    @TableField(exist = false)
     private List<SysRole> roles;
 }
