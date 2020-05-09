@@ -40,7 +40,7 @@ import java.util.List;
  * @Version 1.0
  **/
 @RestController
-@RequestMapping(value = "/oauth2/code/github")
+@RequestMapping(value = "/oauth2/code/github1")
 @Slf4j
 public class AuthController {
     @Resource
@@ -148,7 +148,7 @@ public class AuthController {
             }
 
             //    302  重定向
-            response.sendRedirect("http://localhost:8081/#/auth?user=" + user);
+            response.sendRedirect("http://localhost:8081/#/githubinfo?user=" + user);
 //            response.sendRedirect("http://localhost:8081/#/login?code="+code);
 
         } catch (IOException e) {

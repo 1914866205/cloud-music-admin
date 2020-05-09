@@ -5,8 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.soft1851.music.admin.common.ResponseResult;
 import com.soft1851.music.admin.domain.entity.GithubUser;
 import com.soft1851.music.admin.domain.entity.Repositories;
-import com.soft1851.music.admin.service.RoleAdminService;
-import com.soft1851.music.admin.service.SysAdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,11 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
@@ -38,7 +31,7 @@ import java.util.*;
  * @Version 1.0
  **/
 @RestController
-@RequestMapping(value = "/oauth2/code/github1")
+@RequestMapping(value = "/oauth2/code/github")
 @Slf4j
 public class AuthController2 {
     /**
@@ -114,7 +107,7 @@ public class AuthController2 {
 //            token = JSONObject.parseObject(content).getString("access_token");
 //            content>>>>>>>>>>>>access_token=bb00118ab323307450a3f42a42b7d6ee51fed3d4&scope=read%3Auser&token_type=bearer
                 token = content.split("&")[0].split("=")[1];
-                log.info("token>>>>>>>>>>>>" + token);
+//                log.info("token>>>>>>>>>>>>" + token);
                 //取user数据
 
                 //第二次请求取用户数据
@@ -126,7 +119,7 @@ public class AuthController2 {
                 httpResponse = client.execute(get);
                 contentEntity = httpResponse.getEntity();
                 user = EntityUtils.toString(contentEntity);
-                log.info("user>>>>>>>>>>>>>>" + user);
+//                log.info("user>>>>>>>>>>>>>>" + user);
                 JSONObject object = JSONObject.parseObject(user);
                 users.add(object);
 
@@ -145,7 +138,7 @@ public class AuthController2 {
                 String following = EntityUtils.toString(contentEntity);
                 log.info("following>>>>>>>>>>>>>>" + following);
                 List<GithubUser> githubUserList = JSON.parseArray(following, GithubUser.class);
-                followers.add(githubUserList);
+                followings.add(githubUserList);
 
                 //请求取followers数据
                 HttpGet get3 = new HttpGet("https://api.github.com/users/" + jsonObject.getString("login") + "/followers?access_token=" + token);
@@ -155,7 +148,7 @@ public class AuthController2 {
                 httpResponse = client.execute(get3);
                 contentEntity = httpResponse.getEntity();
                 String followerStr = EntityUtils.toString(contentEntity);
-                log.info("followerStr>>>>>>>>>>>>>>" + followerStr);
+//                log.info("followerStr>>>>>>>>>>>>>>" + followerStr);
                 List<GithubUser> githubUserFollowerList = JSON.parseArray(followerStr, GithubUser.class);
                 followers.add(githubUserFollowerList);
 
@@ -167,13 +160,14 @@ public class AuthController2 {
                 httpResponse = client.execute(get4);
                 contentEntity = httpResponse.getEntity();
                 String repos = EntityUtils.toString(contentEntity);
-                log.info("repos>>>>>>>>>>>>>>" + repos);
+//                log.info("repos>>>>>>>>>>>>>>" + repos);
                 List<Repositories> repositoriesList = JSON.parseArray(repos, Repositories.class);
                 repositories.add(repositoriesList);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+//        System.out.println(map);
         return ResponseResult.success(map);
     }
 }
